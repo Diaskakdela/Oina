@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserServiceOina", "UserServiceOina\UserServiceOina.csproj", "{3392EF88-3CA9-4CC0-8E0A-D23EA2879743}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToysService", "ToysService\ToysService.csproj", "{E47A8436-8C5A-418B-8024-24DBDC71AAFB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3392EF88-3CA9-4CC0-8E0A-D23EA2879743}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3392EF88-3CA9-4CC0-8E0A-D23EA2879743}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3392EF88-3CA9-4CC0-8E0A-D23EA2879743}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3392EF88-3CA9-4CC0-8E0A-D23EA2879743}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E47A8436-8C5A-418B-8024-24DBDC71AAFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E47A8436-8C5A-418B-8024-24DBDC71AAFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E47A8436-8C5A-418B-8024-24DBDC71AAFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E47A8436-8C5A-418B-8024-24DBDC71AAFB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

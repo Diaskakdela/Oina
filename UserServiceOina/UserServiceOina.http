@@ -1,0 +1,6 @@
+@UserServiceOina_HostAddress = http://localhost:5046
+
+GET {{UserServiceOina_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

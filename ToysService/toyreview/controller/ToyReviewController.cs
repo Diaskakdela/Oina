@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ToysService.core.filter;
 using ToysService.toyreview.model;
 using ToysService.toyreview.service;
 
@@ -11,6 +12,7 @@ public class ToyReviewController(IToyReviewService toyReviewService) : Controlle
 {
     [HttpGet("{id}/review")]
     [AllowAnonymous]
+    [ValidateGuid("id")]
     public IActionResult FindAll(string id)
     {
         return Ok(toyReviewService.FindAllByToyId(Guid.Parse(id)));
@@ -18,6 +20,7 @@ public class ToyReviewController(IToyReviewService toyReviewService) : Controlle
 
     [HttpPost("{id}/review")]
     [Authorize(Roles = "USER")]
+    [ValidateGuid("id")]
     public IActionResult Create(string id, [FromBody] ToyReviewCreationRequest toyReviewCreationRequest)
     {
         try

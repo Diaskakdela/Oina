@@ -1,4 +1,5 @@
 using UserServiceOina.entity;
+using UserServiceOina.events;
 using UserServiceOina.exceptions;
 using UserServiceOina.factory;
 using UserServiceOina.model;
@@ -10,30 +11,50 @@ public class UserService(
     IUserRepository userRepository,
     IUserFactory userFactory,
     IJwtService jwtService,
-    IRenterService renterService) : IUserService
+    IRenterService renterService,
+    ILogger<UserService> logger) : IUserService
 {
-    private string RegisterUser(UserRegistrationParams userRegistrationParams, RoleEnum role)
+
+    private string RegisterWithRole(UserRegistrationParams userRegistrationParams, RoleEnum role)
     {
+        logger.LogInformation(
+            $"Attempting to register new user with email: {userRegistrationParams.Email} and role: {role}");
         if (userRepository.FindUserByEmail(userRegistrationParams.Email) != null)
         {
+            logger.LogWarning(
+                $"Registration attempt failed: User with email {userRegistrationParams.Email} already exists.");
             throw new UserRegistrationException("User with this email already exists.");
         }
 
         var user = userFactory.CreateFromRegistrationParams(userRegistrationParams);
-        var renterId = renterService.CreateNewRenter(new RenterCreationParams(user.Id));
         var savedUser = userRepository.RegisterUserWithRole(user, role);
-        var token = jwtService.GenerateToken(UserDetails.Create(savedUser, renterId));
+        var renterId = renterService.CreateNewRenter(new RenterCreationParams(savedUser.Id));
+        logger.LogInformation($"User registered successfully with ID: {savedUser.Id}");
+
+        var token = jwtService.GenerateToken(JwtUserDetails.Create(savedUser, renterId));
+
+        OnUserRegistered(savedUser);
+
+        logger.LogInformation($"JWT token generated for user ID: {savedUser.Id}");
 
         return token;
     }
 
-    public string RegisterSimpleUser(UserRegistrationParams userRegistrationParams)
+    public event UserRegistrationEventHandler? UserRegistered;
+
+    public string RegisterUser(UserRegistrationParams userRegistrationParams)
     {
-        return RegisterUser(userRegistrationParams, RoleEnum.User);
+        return RegisterWithRole(userRegistrationParams, RoleEnum.User);
     }
 
     public string RegisterAdmin(UserRegistrationParams userRegistrationParams)
     {
-        return RegisterUser(userRegistrationParams, RoleEnum.Admin);
+        return RegisterWithRole(userRegistrationParams, RoleEnum.Admin);
+    }
+
+    protected virtual void OnUserRegistered(User user)
+    {
+        UserRegistered?.Invoke(this, new UserRegisteredEventArgs() {User = user});
     }
 }
+public delegate void UserRegistrationEventHandler(Object sender, UserRegisteredEventArgs e);

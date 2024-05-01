@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ToysService.core.filter;
 using ToysService.toy.model;
 using ToysService.toy.model.request;
 using ToysService.toy.service;
@@ -19,7 +20,8 @@ public class ToyController(IToyService toyService, ToyMapper toyMapper) : Contro
 
     [HttpGet("{id}")]
     [AllowAnonymous]
-    public IActionResult FindById(String id)
+    [ValidateGuid("id")]
+    public IActionResult FindById(string id)
     {
         var toy = toyService.FindById(Guid.Parse(id));
         if (toy == null)
@@ -48,7 +50,8 @@ public class ToyController(IToyService toyService, ToyMapper toyMapper) : Contro
 
     [HttpPut("{id}")]
     [Authorize(Roles = "ADMIN")]
-    public IActionResult Update(String id, [FromBody] ToyUpdateRequest toyUpdateRequest)
+    [ValidateGuid("id")]
+    public IActionResult Update(string id, [FromBody] ToyUpdateRequest toyUpdateRequest)
     {
         try
         {
@@ -64,7 +67,8 @@ public class ToyController(IToyService toyService, ToyMapper toyMapper) : Contro
 
     [HttpDelete("{id}")]
     [Authorize(Roles = "ADMIN")]
-    public IActionResult Delete(String id)
+    [ValidateGuid("id")]
+    public IActionResult Delete(string id)
     {
         try
         {

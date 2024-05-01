@@ -11,7 +11,7 @@ public class CategoryController(ICategoryService categoryService, CategoryMapper
 {
     [HttpGet]
     [AllowAnonymous]
-    public IActionResult FindAll(string id) => Ok(categoryService.FindAll().Select(categoryMapper.MapToDto));
+    public IActionResult FindAll() => Ok(categoryService.FindAll().Select(categoryMapper.MapToDto));
 
     [HttpPost]
     [Authorize(Roles = "ADMIN")]

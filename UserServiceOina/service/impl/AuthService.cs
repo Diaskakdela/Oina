@@ -17,7 +17,7 @@ public class AuthService(IUserRepository userRepository, IJwtService jwtService,
         }
 
         var renterId = renterRepository.FindByUserId(user.Id).Id;
-        return jwtService.GenerateToken(UserDetails.Create(user, renterId));
+        return jwtService.GenerateToken(JwtUserDetails.Create(user, renterId));
     }
 
     private bool IsPasswordCorrect(User? user, string providedPassword)

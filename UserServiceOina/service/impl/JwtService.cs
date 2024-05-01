@@ -8,9 +8,9 @@ namespace UserServiceOina.service.impl;
 
 public class JwtService(IConfiguration configuration) : IJwtService
 {
-    public string GenerateToken(UserDetails userDetails)
+    public string GenerateToken(JwtUserDetails jwtUserDetails)
     {
-        var claims = CreateClaims(userDetails);
+        var claims = CreateClaims(jwtUserDetails);
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["jwt:key"]));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
@@ -29,16 +29,16 @@ public class JwtService(IConfiguration configuration) : IJwtService
         return tokenHandler.WriteToken(token);
     }
 
-    private IList<Claim> CreateClaims(UserDetails userDetails)
+    private IList<Claim> CreateClaims(JwtUserDetails jwtUserDetails)
     {
         var claims = new List<Claim>
         {
-            new(JwtRegisteredClaimNames.Sub, userDetails.RenterId.ToString()),
-            new(JwtRegisteredClaimNames.Email, userDetails.Login),
+            new(JwtRegisteredClaimNames.Sub, jwtUserDetails.RenterId.ToString()),
+            new(JwtRegisteredClaimNames.Email, jwtUserDetails.Login),
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
 
-        foreach (var role in userDetails.RolesList)
+        foreach (var role in jwtUserDetails.RolesList)
         {
             claims.Add(new Claim(ClaimTypes.Role, role));
         }

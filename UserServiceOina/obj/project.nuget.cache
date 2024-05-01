@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "0/iaHCIH6k70gHTFeM3WE1Y4Q2fl+MwIPp+L7OvYr+jcFxMprf3PN0kd1nUN0Qv4rZG7CrPN0uw95V0dy+62Gg==",
+  "dgSpecHash": "qCIfQFk3hC2LKtTDklp8qz0u/uLFI2p8KdyVQDqTcgIIDNNgG3OB2IJhc7qc0V+SfKAPKOqJrnvgvY1DyL7X6g==",
   "success": true,
   "projectFilePath": "/Users/dosp/RiderProjects/UserServiceOina/UserServiceOina/UserServiceOina.csproj",
   "expectedPackageFiles": [
     "/Users/dosp/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
+    "/Users/dosp/.nuget/packages/confluent.kafka/2.3.0/confluent.kafka.2.3.0.nupkg.sha512",
     "/Users/dosp/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
+    "/Users/dosp/.nuget/packages/librdkafka.redist/2.3.0/librdkafka.redist.2.3.0.nupkg.sha512",
     "/Users/dosp/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/8.0.4/microsoft.aspnetcore.authentication.jwtbearer.8.0.4.nupkg.sha512",
     "/Users/dosp/.nuget/packages/microsoft.aspnetcore.openapi/8.0.1/microsoft.aspnetcore.openapi.8.0.1.nupkg.sha512",
     "/Users/dosp/.nuget/packages/microsoft.bcl.asyncinterfaces/6.0.0/microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
@@ -55,6 +57,7 @@
     "/Users/dosp/.nuget/packages/system.composition.typedparts/6.0.0/system.composition.typedparts.6.0.0.nupkg.sha512",
     "/Users/dosp/.nuget/packages/system.identitymodel.tokens.jwt/7.1.2/system.identitymodel.tokens.jwt.7.1.2.nupkg.sha512",
     "/Users/dosp/.nuget/packages/system.io.pipelines/6.0.3/system.io.pipelines.6.0.3.nupkg.sha512",
+    "/Users/dosp/.nuget/packages/system.memory/4.5.0/system.memory.4.5.0.nupkg.sha512",
     "/Users/dosp/.nuget/packages/system.reflection.metadata/6.0.1/system.reflection.metadata.6.0.1.nupkg.sha512",
     "/Users/dosp/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "/Users/dosp/.nuget/packages/system.text.encoding.codepages/6.0.0/system.text.encoding.codepages.6.0.0.nupkg.sha512",

@@ -35,7 +35,7 @@ public class UserController(IAuthService authService, IUserService userService, 
     {
         try
         {
-            var token = userService.RegisterSimpleUser(userMapper.MapToRegistrationParams(registrationRequest));
+            var token = userService.RegisterUser(userMapper.MapToRegistrationParams(registrationRequest));
             return Ok(new { Token = token });
         }
         catch (UserRegistrationException ure)

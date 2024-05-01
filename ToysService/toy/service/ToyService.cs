@@ -1,4 +1,5 @@
 using ToysService.toy.entity;
+using ToysService.toy.exceptions;
 using ToysService.toy.factory;
 using ToysService.toy.model;
 using ToysService.toy.repository;
@@ -25,11 +26,35 @@ public class ToyService(IToyRepository toyRepository, ToyFactory toyFactory) : I
 
     public Toy UpdateById(Guid toyId, ToyUpdateParams updateParams)
     {
-        return toyRepository.UpdateById(toyId, updateParams);
+        var toy = FindById(toyId);
+        if (toy == null)
+        {
+            throw new ToyNotFoundException($"Toy with id={toyId} not found!");
+        }
+
+        UpdateExistsParams(toy, updateParams);
+        toyRepository.Update(toy);
+        return toy;
     }
 
     public void DeleteById(Guid toyId)
     {
         toyRepository.DeleteById(toyId);
+    }
+
+    private void UpdateExistsParams(Toy toyToUpdate, ToyUpdateParams updateParams)
+    {
+        if (!string.IsNullOrEmpty(updateParams.Name))
+            toyToUpdate.Name = updateParams.Name;
+        if (!string.IsNullOrEmpty(updateParams.Description))
+            toyToUpdate.Description = updateParams.Description;
+        if (!string.IsNullOrEmpty(updateParams.AgeRange))
+            toyToUpdate.AgeRange = updateParams.AgeRange;
+        if (updateParams.CategoryId != Guid.Empty)
+            toyToUpdate.CategoryId = updateParams.CategoryId;
+        if (updateParams.Price > 0)
+            toyToUpdate.Price = updateParams.Price;
+        if (!string.IsNullOrEmpty(updateParams.ImageUrl))
+            toyToUpdate.ImageUrl = updateParams.ImageUrl;
     }
 }

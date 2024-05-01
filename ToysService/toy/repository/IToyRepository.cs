@@ -10,8 +10,8 @@ public interface IToyRepository
     Toy? FindById(Guid toyId);
 
     Toy Create(Toy toy);
-
-    Toy UpdateById(Guid toyId, ToyUpdateParams updateParams);
+    
+    void Update(Toy toy);
 
     void DeleteById(Guid toyId);
 }

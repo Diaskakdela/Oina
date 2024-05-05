@@ -14,6 +14,7 @@ public class UserService(
     IRenterService renterService,
     ILogger<UserService> logger) : IUserService
 {
+    public event UserRegistrationEventHandler? UserRegistered;
 
     private string RegisterWithRole(UserRegistrationParams userRegistrationParams, RoleEnum role)
     {
@@ -40,8 +41,6 @@ public class UserService(
         return token;
     }
 
-    public event UserRegistrationEventHandler? UserRegistered;
-
     public string RegisterUser(UserRegistrationParams userRegistrationParams)
     {
         return RegisterWithRole(userRegistrationParams, RoleEnum.User);
@@ -54,7 +53,8 @@ public class UserService(
 
     protected virtual void OnUserRegistered(User user)
     {
-        UserRegistered?.Invoke(this, new UserRegisteredEventArgs() {User = user});
+        UserRegistered?.Invoke(this, new UserRegisteredEventArgs() { User = user });
     }
 }
-public delegate void UserRegistrationEventHandler(Object sender, UserRegisteredEventArgs e);
+
+public delegate void UserRegistrationEventHandler(UserService sender, UserRegisteredEventArgs e);
